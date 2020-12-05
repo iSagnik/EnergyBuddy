@@ -1,11 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import Context from "../contexts/goalsContext.js"
 
 export default function Goal( props ) {
 
-    // async function setData() {
+
+    const [hasAdded, setAdd] = useState();
+    const [goalsToAdd, setGoals] = useState([])
+
+    function setGoalsToAdd(shouldAdd, id) {
+        if( shouldAdd) {
+            goalsToAdd.push(id)
+            setGoals(goalsToAdd)
+        }
+        else {
+            //remove from list
+            var temp = []
+            for(var i = 0; i < goalsToAdd.length; i++) {
+                if(goalsToAdd[i] != id)
+                    temp.push(goalsToAdd[i])
+            }
+            setGoals(temp)
+        }
+    }
+
+    const handleClick = ( uniqueId ) => {
+        if (hasAdded) {
+            //remove from list
+            setAdd(false)
+            setGoalsToAdd(0, props.uniqueId)
+        }
+        else {
+            //add to the list
+            setAdd(true)
+            setGoalsToAdd(1, props.uniqueId)
+        }
+    }
+    
+    return ( 
+        <Context.Provider value = {goalsToAdd} >
+        <Card style={{ width: '18rem' }}>
+            <Card.Body>
+            <Card.Title>{props.displayName}</Card.Title>
+                {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+            <Card.Subtitle className="mb-2 text-muted">{props.points}</Card.Subtitle>
+            <Card.Text>
+                Description
+            </Card.Text>
+            {/* <Card.Link href="#">Add</Card.Link>
+            <Card.Link href="#">Another Link</Card.Link> */}
+            {!hasAdded ? <Button onClick = { handleClick( props.uniqueId) } variant="primary"> Add </Button> : <Button onClick = { handleClick } variant="danger"> Remove </Button> }
+            </Card.Body>
+        </Card>
+        </Context.Provider>
+  );
+
+}
+
+
+   // async function setData() {
     //     const result = await axios({
     //         method: 'put',
     //         url: `https://sustainability-goals-default-rtdb.firebaseio.com/.json`,
@@ -206,23 +261,3 @@ export default function Goal( props ) {
     //         }
     //     }});
     // }
-
-    
-
-    return ( 
-        <Card style={{ width: '18rem' }}>
-            <Card.Body>
-            <Card.Title>{props.displayName}</Card.Title>
-                {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-            <Card.Subtitle className="mb-2 text-muted">{props.points}</Card.Subtitle>
-            <Card.Text>
-                Description
-            </Card.Text>
-            {/* <Card.Link href="#">Add</Card.Link>
-            <Card.Link href="#">Another Link</Card.Link> */}
-            <Button variant="primary">Add</Button>
-            </Card.Body>
-        </Card>
-  );
-
-}

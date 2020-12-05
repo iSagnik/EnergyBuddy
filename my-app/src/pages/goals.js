@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Goal from '../components/goal.js';
-import { CardColumns } from 'react-bootstrap';
+import { CardColumns, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Layout from '../components/layout.js';
-
-
+import Context from "../contexts/goalsContext.js"
 
 export default function Goals() {
+    const {goalsToAdd} = useContext(Context)
+    console.log(goalsToAdd)
     const [goalsInfo, setGoals] = useState([]);
+    // const [goalsToAdd, setGoalsToAdd] = useState([]);
 
     async function readAllData() {
         // if (!loading) {
@@ -22,10 +24,14 @@ export default function Goals() {
     }
 
     readAllData();
-
+    const handleGoalsButtonClick = () => {
+        //push to database
+        console.log("Button click successful")
+    }
 
     return (
         <Layout>
+            <Button onClick = { handleGoalsButtonClick } variant="primary"> Done </Button>
             <CardColumns>
             {
                 goalsInfo &&

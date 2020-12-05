@@ -10,8 +10,8 @@ function App() {
   return (
     <div className="App">
       <AuthProvider> 
-        {/* <Login/> */}
-        <Goals/>
+        { <Login/>}
+        {/* <Goals/> */}
       </AuthProvider>
     </div>
   );
