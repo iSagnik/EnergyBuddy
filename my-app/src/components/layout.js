@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import Navbar from 'react-bootstrap/Navbar'
+import {Nav, NavDropdown, Navbar} from 'react-bootstrap'
 
 const Layout = ({ children }) => {
 
