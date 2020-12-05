@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Goal from './../component/goal.js';
-import { Card, CardColumns, Button } from 'react-bootstrap';
+import { CardColumns } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import Layout from '../components/layout.js';
 
 
 
@@ -24,7 +25,8 @@ export default function Goals() {
 
 
     return (
-        <CardColumns>
+        <Layout>
+            <CardColumns>
             {
                 goalsInfo &&
                 goalsInfo.map( card => (
@@ -38,6 +40,7 @@ export default function Goals() {
                    )
                 )
             }
-        </CardColumns>
+            </CardColumns>
+        </Layout>
     )
 }
