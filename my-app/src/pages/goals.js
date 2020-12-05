@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Goal from './../component/goal.js';
+import Goal from '../components/goal.js';
 import { CardColumns } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
