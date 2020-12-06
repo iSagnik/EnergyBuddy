@@ -35,7 +35,7 @@ export default function Login() {
             setError("");
             setLoading(true);
             let a = await login(usernameRef.current.value, passwordRef.current.value);
-            // history.push('/goals');
+            history.push('/dashboard');
             // console.log(currentUser);
         } catch {
             setError("Account credentials are wrong");
@@ -107,7 +107,7 @@ export default function Login() {
         return (<div className="tabs-content">
             <div className="signup-container">
         <form className="signup-form" onSubmit={handleSignUpSubmit}>
-            {error && <h4>{error}</h4>}
+            {error && <h4 id="error">{error}</h4>}
                 <div id="login-tab-content" className="active">
                     {/* <form className="signup-form" action="" method="post"> */}
                         <input type="text" className="input" id="user_name" autoComplete="off" placeholder="Name" ref={nameRef}/>
@@ -132,6 +132,22 @@ export default function Login() {
         setLogin(true);
     }
 
+    function renderDarkLogin() {
+        return (<div className="tabs">
+            <h3><a href="#signup-tab-content" onClick={setLoginFalse}>Sign Up</a></h3>
+            <h3><a className="active" href="#login-tab-content" onClick={setLoginTrue}>Login</a></h3>
+        </div>
+        )
+    }
+
+    function renderDarkSignUp() {
+        return (<div className="tabs">
+            <h3><a className="active" href="#signup-tab-content" onClick={setLoginFalse}>Sign Up</a></h3>
+            <h3><a href="#login-tab-content" onClick={setLoginTrue}>Login</a></h3>
+        </div>
+        )
+    }
+
     return ( <div style={{ width: 'auto', height: 'auto'}}>
         <ResponsiveEmbed aspectRatio="16by9" style={{position: "fixed"}}>
             <video id="background-video" className="videoTag" autoPlay="autoplay" loop="loop" muted>
@@ -141,10 +157,7 @@ export default function Login() {
                 
     <div className="login-container" style={{position:"fixed"}}>
         <div className="form-wrap">
-            <div className="tabs">
-                <h3 className="signup-tab"><a className="active" href="#signup-tab-content" onClick={setLoginFalse}>Sign Up</a></h3>
-                <h3 className="login-tab"><a href="#login-tab-content" onClick={setLoginTrue}>Login</a></h3>
-            </div>
+            {isLogin ? renderDarkLogin() : renderDarkSignUp()}
 
             {isLogin ? renderLogin() : renderSignUp()}
         </div>
