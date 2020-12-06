@@ -10,7 +10,7 @@ export default function Goal( props ) {
 
     function setGoalsToAdd() {
         console.log("Add button")
-        goalsToAdd.push(props.id)
+        goalsToAdd.push(props.uniqueId)
         setGoals(goalsToAdd)
         setToAdd(true)
     }
@@ -20,7 +20,7 @@ export default function Goal( props ) {
             //remove from list
         var temp = []
         for(var i = 0; i < goalsToAdd.length; i++) {
-            if(goalsToAdd[i] != props.id)
+            if(goalsToAdd[i] !== props.uniqueId)
                 temp.push(goalsToAdd[i])
         }
         setGoals(temp)
@@ -33,13 +33,13 @@ export default function Goal( props ) {
             <Card.Body>
             <Card.Title>{props.displayName}</Card.Title>
                 {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-            <Card.Subtitle className="mb-2 text-muted">{props.points}</Card.Subtitle>
+            <Card.Subtitle className="mb-2 text-muted">{props.points} points</Card.Subtitle>
             <Card.Text>
                 Description
             </Card.Text>
             {/* <Card.Link href="#">Add</Card.Link>
             <Card.Link href="#">Another Link</Card.Link> */}
-            {console.log(goalsToAdd.toString())}
+            {console.log("ID:   " + goalsToAdd[0])}
             { !toAdd ? <Button onClick = { setGoalsToAdd } variant="primary"> Add </Button> : <Button onClick = { setGoalsToRemove } variant="danger"> Remove </Button> }
             </Card.Body>
         </Card>
@@ -47,7 +47,6 @@ export default function Goal( props ) {
   );
 
 }
-
 
    // async function setData() {
     //     const result = await axios({
