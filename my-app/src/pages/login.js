@@ -24,7 +24,7 @@ export default function Login() {
             setError("");
             setLoading(true);
             let a = await login(usernameRef.current.value, passwordRef.current.value);
-            // history.push('/profile');
+            // history.push('/goals');
             // console.log(currentUser);
         } catch {
             setError("Account credentials are wrong");
@@ -64,7 +64,7 @@ export default function Login() {
                         <input type="checkbox" class="checkbox" id="remember_me"/>
                         <label for="remember_me">Remember me</label>
 
-                        <input type="submit" class="button" value="Login"/>
+                        <input type="submit" class="button" value="Login" onClick={handleSubmit}/>
                     </form>
                     <div class="help-text">
                         <p><a href="#">Forget your password?</a></p>

@@ -1,8 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap'
+import { useAuth } from '../contexts/authContext';
 
 const Layout = ({ children }) => {
+
+    const { logout } = useAuth();
 
   return (
     <>
@@ -24,8 +27,8 @@ const Layout = ({ children }) => {
                 </Nav>
                 <Nav>
                 <Nav.Link href="#deets">More deets</Nav.Link>
-                <Nav.Link eventKey={2} href="#memes">
-                    Dank memes
+                <Nav.Link onClick={logout} href="/">
+                    Logout
                 </Nav.Link>
                 </Nav>
             </Navbar.Collapse>
