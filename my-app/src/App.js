@@ -13,7 +13,6 @@ function App() {
             <Route path="/goals" component={Goals} />
             <Route path="/dashboard" component={DashBoard}/>
             <Route exact path="/" component={Login}/>
-            
         </Switch> 
       </AuthProvider>
     </Router>

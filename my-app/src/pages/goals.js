@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Layout from '../components/layout.js';
 import Context from "../contexts/goalsContext.js";
-import { useAuth } from '../contexts/authContext';
+import { useAuth } from '../contexts/authContext.js';
 
 function Goals() {
     const [goalsInfo, setGoalsInfo] = useState([]);
@@ -24,8 +24,8 @@ function Goals() {
     }
 
     const getUserGoals = async () => {
-        //let username = getUsername(currentUser.email);
-        let username = "tejasgmail";
+        let username = getUsername(currentUser.email);
+        // let username = "tejasgmail";
         const result = await axios({
             method: 'get',
             url: `https://sustainability-goals-default-rtdb.firebaseio.com/users/${username}/goalsList.json`,
@@ -46,8 +46,8 @@ function Goals() {
     }
 
     async function updateGoalsList(user, list) {
-        //let username = getUsername(user.email);
-        let username = "tejasgmail";
+        let username = getUsername(user.email);
+        //  let username = "tejasgmail";
         const obj = {goalsList: list};
         const result = await axios({
             method: 'patch',
@@ -60,8 +60,6 @@ function Goals() {
     useEffect(() => {
         readAllData();
         getUserGoals();
-        
-
     }, [])
     
     const HandleGoalsButtonClick = () => {
@@ -73,8 +71,11 @@ function Goals() {
     
     return (
         <Layout>
+            <h6 style={{color:"white", backgroundColor: "gray", padding: "1%"}}>Choose which sustainability goals you want to work towards! When you
+                are finished selecting, press the 'Done' button below</h6>
             <Container>
-                <Button onClick = { HandleGoalsButtonClick } variant="primary"> Done </Button>
+                
+                <Button onClick = { HandleGoalsButtonClick } variant="success" style={{marginBottom: "1%"}}> Done </Button>
                 
                 <CardColumns>
                     {console.log("type of goalsToAdd: " + typeof goalsToAdd)}

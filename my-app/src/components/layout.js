@@ -2,9 +2,14 @@ import React from "react"
 import PropTypes from "prop-types"
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap'
 import { useAuth } from '../contexts/authContext';
+// import Image from 'react-bootstrap/Image';
+// import natureBackground from '../media/natureBackground.jpg'
+import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed';
+// import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import '../styles/layout.css';
+
 
 const Layout = ({ children }) => {
-
     const { logout } = useAuth();
 
   return (
@@ -27,13 +32,19 @@ const Layout = ({ children }) => {
             </Navbar.Collapse>
         </Navbar>
         </header>
-        <main>{children}</main>
+        <main id="main">
+            {children}
+        </main>
+        
+        {/* </div>
+
+</div> */}
         <footer>
             <Navbar bg="dark">
-                <Navbar.Brand>Brand text</Navbar.Brand>
+                <Navbar.Brand style={{color: "white", fontSize: "20px"}}>Created by Arpita D., Sagnik B., Tejas P., and Simran S.</Navbar.Brand>
             </Navbar>
         </footer>
-                </>
+    </>
     )
 }
 
