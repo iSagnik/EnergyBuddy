@@ -12,7 +12,7 @@ export default function SignUp() {
     const roleRef = useRef();
     const nameRef = useRef();
 
-    const { signup, currentUser } = useAuth();
+    const { login, currentUser } = useAuth();
 
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
@@ -24,9 +24,9 @@ export default function SignUp() {
         try {
             setError("");
             setLoading(true);
-            await signup(emailRef.current.value, passwordRef.current.value);
-            setData(); 
-            //history.push('/profile');
+            await login(emailRef.current.value, passwordRef.current.value);
+            // setData(); 
+            history.push('/goals');
         } catch {
             setError("Something went wrong. Try again");
         }
