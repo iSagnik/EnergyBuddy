@@ -8,7 +8,8 @@ import Context from "../contexts/goalsContext.js"
 
 function Goals() {
     // console.log(goalsToAdd)
-    const [goalsInfo, setGoals] = useState([]);
+    const [goalsInfo, setGoalsInfo] = useState([]);
+    const [goalsToAdd, setGoals] = useState([])
 
     const readAllData = async () => {
         const result = await axios({
@@ -17,7 +18,7 @@ function Goals() {
             withCredientials: true
            })//.then((x) => setGoals(Object.values(x.data)));
            const response = await result
-           setGoals(Object.values(response.data))
+           setGoalsInfo(Object.values(response.data))
            console.log(JSON.stringify(response.data))
     }
 
@@ -26,15 +27,19 @@ function Goals() {
     }, [])
     
     const HandleGoalsButtonClick = () => {
-        const {goalsToAdd} = useContext(Context)
+        // const {goalsToAdd} = useContext(Context)
         //push to database
+        console.log(goalsToAdd.length)
         console.log("Button click successful")
     }
     
     return (
         <Layout>
             <Button onClick = { HandleGoalsButtonClick } variant="primary"> Done </Button>
+            
                 <CardColumns>
+                    {console.log("type of goalsToAdd: " + typeof goalsToAdd)}
+                <Context.Provider value = { {goalsToAdd, setGoals} } >
                 {
                     goalsInfo &&
                     goalsInfo.map( card => (
@@ -48,7 +53,9 @@ function Goals() {
                     )
                     )
                 }
+                </Context.Provider>
                 </CardColumns>
+            
         </Layout>
     )
 }

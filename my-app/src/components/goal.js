@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 import Context from "../contexts/goalsContext.js"
 
 export default function Goal( props ) {
-    const [goalsToAdd, setGoals] = useState([])
     const [toAdd, setToAdd] = useState(false)
-
+    const {goalsToAdd, setGoals} = useContext(Context)
+    {console.log("type of goalsToAdd in goal: " + typeof setGoals)}
     function setGoalsToAdd() {
         console.log("Add button")
+        console.log(typeof goalsToAdd)
         goalsToAdd.push(props.uniqueId)
         setGoals(goalsToAdd)
         setToAdd(true)
@@ -28,7 +28,7 @@ export default function Goal( props ) {
     }
     
     return ( 
-        <Context.Provider value = {goalsToAdd} >
+        // <Context.Provider value = {goalsToAdd} >
         <Card style={{ width: '18rem' }}>
             <Card.Body>
             <Card.Title>{props.displayName}</Card.Title>
@@ -39,11 +39,11 @@ export default function Goal( props ) {
             </Card.Text>
             {/* <Card.Link href="#">Add</Card.Link>
             <Card.Link href="#">Another Link</Card.Link> */}
-            {console.log("ID:   " + goalsToAdd[0])}
+            {goalsToAdd && console.log("ID:   " + goalsToAdd.toString())}
             { !toAdd ? <Button onClick = { setGoalsToAdd } variant="primary"> Add </Button> : <Button onClick = { setGoalsToRemove } variant="danger"> Remove </Button> }
             </Card.Body>
         </Card>
-        </Context.Provider>
+        // </Context.Provider>
   );
 
 }
