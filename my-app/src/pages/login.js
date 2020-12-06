@@ -6,6 +6,7 @@ import loginBackground from '../media/loginBackground.mp4';
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed';
 import '../styles/login.css';
 import axios from 'axios';
+import Community from './../components/community.js';
 
 export default function Login() {
 
@@ -161,6 +162,8 @@ export default function Login() {
 
             {isLogin ? renderLogin() : renderSignUp()}
         </div>
+
+        <Community/>
     </div>
 </div>               
     )

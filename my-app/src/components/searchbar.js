@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Searchbar(props) {
+function Searchbar({names, parentfunction}) {
     
     const [suggestions, setSuggestions] = useState([]);
     const [text, setText] = useState('');
@@ -27,7 +27,7 @@ function Searchbar(props) {
 
     function onTextChange(e) {
         setDisplay(false);
-        const { items } = props;
+        const items = names;
         const value = e.target.value;
         let suggestions1 =[];
         
@@ -44,6 +44,7 @@ function Searchbar(props) {
     function suggestionSelected(value) {
         //setTimeout(function() {
         setText(value);
+        parentfunction(value);
         setSuggestions([]);
         // setLoading(true);
         // readStepData(value);
