@@ -36,7 +36,7 @@ export default function Login() {
             setError("");
             setLoading(true);
             let a = await login(usernameRef.current.value, passwordRef.current.value);
-            history.push('/dashboard');
+            history.push('/goals');
             // console.log(currentUser);
         } catch {
             setError("Account credentials are wrong");
