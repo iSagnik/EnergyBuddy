@@ -1,41 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import { Col, Row, ListGroup } from 'react-bootstrap'
-import axios from 'axios';
 
 const MyGoalsDash = ( {goals} ) => {
-
-    const[ goalData, setGoalData] = useState([])
-
     
-    const getGoalObject = async () => {
-        let goalsObjects = []
-        for(var i = 0; i < goals.length; i++) {
-            const result = await axios({
-                method: 'get',
-                url: `https://sustainability-goals-default-rtdb.firebaseio.com/goalInfo/${goals[i]}.json`,
-                withCredientials: true
-               })
-               const response = await result
-               const temp = response.data
+    // const getGoalObject = async () => {
+    //     let goalsObjects = {}
+        
+    //     for(const obj in goals) {
+    //         const result = await axios({
+    //             method: 'get',
+    //             url: `https://sustainability-goals-default-rtdb.firebaseio.com/goalInfo/${obj}.json`,
+    //             withCredientials: true
+    //            })
+    //            const response = await result
+    //            const temp = response.data
 
-               if(temp) {
-                   console.log(temp.displayName)
-                   goalsObjects.push(temp)
-               } 
-        }
-        setGoalData(goalsObjects)
-    }
+    //            if(temp) {
+    //                console.log(temp.displayName)
+    //                goalsObjects.push(temp)
+    //            } 
+    //     }
+    //     setGoalData(goalsObjects)
+    // }
 
     const handleCompletion = () => {
         //set isComplete for particular thing
     }
 
-    useEffect(() => {
-        getGoalObject()
+    // useEffect(() => {
+    //     getGoalObject()
         
-    }, [])
+    // }, [])
 
-
+    //console.log("The user goal: " + JSON.stringify(Object.keys( goals )))
     return (
         <Col className = "my-goals">
         <h4>My Goals</h4>
@@ -45,17 +42,16 @@ const MyGoalsDash = ( {goals} ) => {
             Click to mark as complete
             <ListGroup>
                 {
-                    goalData &&
-                    goalData.map( ( userGoal, i ) => {
-                            return (
-                                <ListGroup.Item action onClick = { handleCompletion }>
-                                    {/* { !(goalObj.isComplete) && goalObj.displayName} */}
-                                    {console.log("Name: " + userGoal.displayName)}
-                                    { userGoal.displayName }
-                                </ListGroup.Item>
-                            )
+                    goals ?
+                    Object.keys( goals ).map( ( userGoal, i ) => {
+                        <ListGroup.Item action onClick = { handleCompletion }>
+                            {/* { !(goalObj.isComplete) && goalObj.displayName} */}
+                            {console.log("Name: " + goals[userGoal].displayName)}
+                            <h1>{ goals[userGoal].displayName }</h1>
+                        </ListGroup.Item>
+                            
                     }
-                    )
+                    ) : <ListGroup.Item>No Goals in Progress</ListGroup.Item>
                 }
             </ListGroup>
         </Row>

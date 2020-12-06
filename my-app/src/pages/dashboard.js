@@ -7,6 +7,13 @@ import MyProgressDash from "../components/dash-myprogress.js"
 import MyCircleDash from "../components/dash-mycircle.js"
 import axios from 'axios';
 
+function getUsername(email) {
+    let em_split = email.split('@');
+    let username = em_split[0]+em_split[1].split('.')[0];
+    return username;
+}
+
+
 const Dashboard = () => {
 
     const { currentUser } = useAuth();
@@ -14,14 +21,16 @@ const Dashboard = () => {
 
 
     const getUserGoals = async () => {
-        //let username = getUsername(currentUser.email);
-        let username = "tejasgmail";
+        let username = getUsername(currentUser.email);
+        // let username = "tejasgmail";
         const result = await axios({
             method: 'get',
             url: `https://sustainability-goals-default-rtdb.firebaseio.com/users/${username}/goalsList.json`,
             withCredientials: true
            })
            const response = await result
+           console.log(response.data)
+           if(response.data)
             setGoals(response.data);
             // console.log("respond.data" + response.data);
     }
@@ -35,6 +44,7 @@ const Dashboard = () => {
             <h1>Dashboard</h1>
             <Container fluid>
             <Row>
+                {console.log(goals)}
                 <MyGoalsDash goals = {goals} />
                 <MyProgressDash />
                 <MyCircleDash />
@@ -44,4 +54,4 @@ const Dashboard = () => {
     )
 
 }
-export default Dashboard
+export default Dashboard;
