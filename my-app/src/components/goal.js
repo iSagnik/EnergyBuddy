@@ -6,13 +6,15 @@ import Context from "../contexts/goalsContext.js"
 export default function Goal( props ) {
     const [toAdd, setToAdd] = useState(false)
     const {goalsToAdd, setGoals} = useContext(Context)
-    
-    {console.log("type of goalsToAdd in goal: " + typeof setGoals)}
+
+    // {console.log("type of goalsToAdd in goal: " + typeof setGoals)}
 
     function setGoalsToAdd() {
         console.log("Add button")
         console.log(typeof goalsToAdd)
-        !goalsToAdd.includes(props.uniqueId) && goalsToAdd.push(props.uniqueId)
+        props.cardObject["isComplete"] = false
+        !(props.uniqueId in goalsToAdd) && (goalsToAdd[props.uniqueId] = props.cardObject)
+        
         setGoals(goalsToAdd)
         setToAdd(true)
     }
@@ -20,10 +22,14 @@ export default function Goal( props ) {
     function setGoalsToRemove() {
         console.log("Delete button")
             //remove from list
-        var temp = []
-        for(var i = 0; i < goalsToAdd.length; i++) {
-            if(goalsToAdd[i] !== props.uniqueId)
-                temp.push(goalsToAdd[i])
+        var temp = {}
+        // for(var i = 0; i < goalsToAdd.length; i++) {
+        //     if(goalsToAdd[i] !== props.uniqueId)
+        //         temp.push(goalsToAdd[i])
+        // }
+        for(const obj in goalsToAdd) {
+            if(obj["uniqueId"] !== props.uniqueId)
+                temp[props.uniqueId] = props.cardObject
         }
         setGoals(temp)
         setToAdd(false)
@@ -40,8 +46,8 @@ export default function Goal( props ) {
                 Description
             </Card.Text>
 
-            {goalsToAdd && console.log("ID:   " + goalsToAdd.toString())}
-            { !(goalsToAdd === `undefined` || goalsToAdd.includes(props.uniqueId)) && !toAdd ? <Button onClick = { setGoalsToAdd } variant="primary"> Add </Button> : <Button onClick = { setGoalsToRemove } variant="danger"> Remove </Button> }
+            {goalsToAdd && console.log("ID:   " + JSON.stringify(goalsToAdd))}
+            { !(goalsToAdd === `undefined` || props.uniqueId in goalsToAdd) && !toAdd ? <Button onClick = { setGoalsToAdd } variant="primary"> Add </Button> : <Button onClick = { setGoalsToRemove } variant="danger"> Remove </Button> }
             </Card.Body>
         </Card>
   );

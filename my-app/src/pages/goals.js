@@ -9,7 +9,7 @@ import { useAuth } from '../contexts/authContext';
 
 function Goals() {
     const [goalsInfo, setGoalsInfo] = useState([]);
-    const [goalsToAdd, setGoals] = useState([]);
+    const [goalsToAdd, setGoals] = useState({});
     const { currentUser } = useAuth();
 
     const readAllData = async () => {
@@ -82,7 +82,8 @@ function Goals() {
                 {
                     goalsInfo &&
                     goalsInfo.map( card => (
-                        <Goal 
+                        <Goal
+                            cardObject = { card }
                             displayName = {card.displayName} 
                             points = {card.points} 
                             uniqueId = {card.uniqueId}
