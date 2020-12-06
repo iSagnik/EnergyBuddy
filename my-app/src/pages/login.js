@@ -89,11 +89,12 @@ export default function Login() {
             setError("");
 
             // check password match
-            if (newPasswordRef != secondPasswordRef) {
+            // console.log(newPasswordRef.current.value, secondPasswordRef.current.value);
+            if (newPasswordRef.current.value != secondPasswordRef.current.value) {
                 setError("Passwords do not match")
             } else {
                 setLoading(true);
-                await signup(emailRef.current.value, passwordRef.current.value);
+                await signup(emailRef.current.value, newPasswordRef.current.value);
                 setData(); 
                 history.push('/goals'); 
             }           
