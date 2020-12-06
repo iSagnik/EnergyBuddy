@@ -99,7 +99,7 @@ export default function SignUp() {
 
                 <div className="field">
                     <div className="control">
-                        <input className="button is-dark" type="submit" disabled={loading}/>
+                        {/* <input className="button is-dark" type="submit" disabled={loading}/> */}
                         {/* <Link to="/signup"> */}
                             <input className="button is-dark" value="Create Account" type="submit"/>
                         {/* </Link> */}

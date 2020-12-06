@@ -5,11 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Layout from '../components/layout.js';
 import Context from "../contexts/goalsContext.js"
-import styled from 'styled-components'
-
-const CardStyle = styled.div`
-    min-width: 400px!important;
-`
 
 function HandleGoalsButtonClick() {
     const {goalsToAdd} = useContext(Context)

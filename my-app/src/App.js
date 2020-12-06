@@ -4,6 +4,7 @@ import './styles/App.css';
 import Login from './pages/login.js';
 import Goals from './pages/goals.js';
 import Goal from './components/goal.js';
+import SignUp from './pages/signup.js';
 
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
     <div className="App">
       <AuthProvider> 
         {/* { <Login/>} */}
-        <Goals/>
+        {/* <Goals/> */}
+        <SignUp/>
       </AuthProvider>
     </div>
   );
