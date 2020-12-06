@@ -10,7 +10,7 @@ const MyGoalsDash = ( {goals} ) => {
     const getGoalObject = async () => {
         let goalsObjects = []
         
-        for(var i = 0; i < goals.length; i++) {
+        for(let i = 0; i < goals.length; i++) {
             const result = await axios({
                 method: 'get',
                 url: `https://sustainability-goals-default-rtdb.firebaseio.com/goalInfo/${goals[i]}.json`,

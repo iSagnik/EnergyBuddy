@@ -41,7 +41,7 @@ const Layout = ({ children }) => {
 </div> */}
         <footer>
             <Navbar bg="dark">
-                <Navbar.Brand style={{color: "white", fontSize: "20px"}}>Created by Arpita Das, Sagnik Nayak, Tejas Pruthi, and Simran Sidhu</Navbar.Brand>
+                <Navbar.Brand style={{color: "white", fontSize: "20px"}}>Created by Arpita D., Sagnik B., Tejas P., and Simran S.</Navbar.Brand>
             </Navbar>
         </footer>
     </>
