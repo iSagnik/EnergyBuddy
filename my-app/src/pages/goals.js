@@ -8,7 +8,6 @@ import Context from "../contexts/goalsContext.js";
 import { useAuth } from '../contexts/authContext';
 
 function Goals() {
-    // console.log(goalsToAdd)
     const [goalsInfo, setGoalsInfo] = useState([]);
     const [goalsToAdd, setGoals] = useState([]);
     const { currentUser } = useAuth();
@@ -45,7 +44,7 @@ function Goals() {
 
     async function updateGoalsList(user, list) {
         //let username = getUsername(user.email);
-         let username = "tejasgmail";
+        let username = "tejasgmail";
         const obj = {goalsList: list};
         const result = await axios({
             method: 'patch',
