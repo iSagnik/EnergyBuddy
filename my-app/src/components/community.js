@@ -5,7 +5,8 @@ import { Button } from 'react-bootstrap';
 
 export default function Community() {
 
-    const[allUsers, setUsers] = useState([]);
+    const[allUsers, setUsers] = useState({});
+    const[allNames, setNames] = useState([]);
 
     
     async function getUsers() {
@@ -15,13 +16,12 @@ export default function Community() {
             withCredientials: true
            }).then((x) => {
                setUsers(Object.keys(x.data));
-           }).then(console.log(allUsers));
+           });
     }
 
     async function handleAddFriend() {
         console.log("added friend");
     }
-
 
     useEffect(() => {
         getUsers();
