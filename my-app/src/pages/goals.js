@@ -25,8 +25,8 @@ function Goals() {
     }
 
     const getUserGoals = async () => {
-        // let username = getUsername(user.email);
-        let username = "tejasgmail";
+        let username = getUsername(currentUser.email);
+        //let username = "tejasgmail";
         const result = await axios({
             method: 'get',
             url: `https://sustainability-goals-default-rtdb.firebaseio.com/users/${username}/goalsList.json`,
@@ -55,14 +55,10 @@ function Goals() {
         });
     }
 
-    // const getUserGoalsList = ( userId ) => {
-
-    // }
-
     useEffect(() => {
         readAllData();
         getUserGoals();
-        //getUserGoalsList
+
     }, [])
     
     const HandleGoalsButtonClick = () => {
