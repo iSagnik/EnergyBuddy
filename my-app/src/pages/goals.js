@@ -68,8 +68,11 @@ function Goals() {
     
     return (
         <Layout>
+            <h6 style={{color:"white", backgroundColor: "gray", padding: "1%"}}>Choose which sustainability goals you want to work towards! When you
+                are finished selecting, press the 'Done' button below</h6>
             <Container>
-                <Button onClick = { HandleGoalsButtonClick } variant="primary"> Done </Button>
+                
+                <Button onClick = { HandleGoalsButtonClick } variant="success" style={{marginBottom: "1%"}}> Done </Button>
                 
                 <CardColumns>
                     {console.log("type of goalsToAdd: " + typeof goalsToAdd)}

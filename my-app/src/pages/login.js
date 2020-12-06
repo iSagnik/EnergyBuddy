@@ -89,7 +89,7 @@ export default function Login() {
             setError("");
             // check password match
             // console.log(newPasswordRef.current.value, secondPasswordRef.current.value);
-            if (newPasswordRef.current.value != secondPasswordRef.current.value) {
+            if (newPasswordRef.current.value !== secondPasswordRef.current.value) {
                 setError("Passwords do not match")
             } else {
                 setLoading(true);
