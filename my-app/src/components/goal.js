@@ -11,7 +11,11 @@ export default function Goal( props ) {
     function setGoalsToAdd() {
         console.log("Add button")
         console.log(typeof goalsToAdd)
-        !goalsToAdd.includes(props.uniqueId) && goalsToAdd.push(props.uniqueId)
+        let obj = {}
+        obj["id"] = props.uniqueId;
+        obj["isComplete"] = false
+        !goalsToAdd.includes(props.uniqueId) && goalsToAdd.push(obj)
+        console.log(obj)
         setGoals(goalsToAdd)
         setToAdd(true)
     }

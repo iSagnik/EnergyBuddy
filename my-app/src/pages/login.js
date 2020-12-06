@@ -87,12 +87,27 @@ export default function Login() {
         e.preventDefault();
         try {
             setError("");
+<<<<<<< HEAD
             setLoading(true);
             await signup(emailRef.current.value, newPasswordRef.current.value);
             setData(); 
             history.push('/goals');
         } 
         catch {
+=======
+
+            // check password match
+            // console.log(newPasswordRef.current.value, secondPasswordRef.current.value);
+            if (newPasswordRef.current.value != secondPasswordRef.current.value) {
+                setError("Passwords do not match")
+            } else {
+                setLoading(true);
+                await signup(emailRef.current.value, newPasswordRef.current.value);
+                setData(); 
+                history.push('/goals'); 
+            }           
+        } catch {
+>>>>>>> f6166f095326c468923cb060203ab6612233688d
             setError("Something went wrong. Try again");
         }
         setLoading(false);
