@@ -22,13 +22,19 @@ function Goals() {
            console.log(JSON.stringify(response.data))
     }
 
+    // const getUserGoalsList = ( userId ) => {
+
+    // }
+
     useEffect(() => {
         readAllData();
+        //getUserGoalsList
     }, [])
     
     const HandleGoalsButtonClick = () => {
-        // const {goalsToAdd} = useContext(Context)
         //push to database
+
+
         console.log(goalsToAdd.length)
         console.log("Button click successful")
     }
