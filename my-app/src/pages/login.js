@@ -87,17 +87,12 @@ export default function Login() {
         e.preventDefault();
         try {
             setError("");
-
-            // check password match
-            if (newPasswordRef != secondPasswordRef) {
-                setError("Passwords do not match")
-            } else {
-                setLoading(true);
-                await signup(emailRef.current.value, passwordRef.current.value);
-                setData(); 
-                history.push('/goals'); 
-            }           
-        } catch {
+            setLoading(true);
+            await signup(emailRef.current.value, newPasswordRef.current.value);
+            setData(); 
+            history.push('/goals');
+        } 
+        catch {
             setError("Something went wrong. Try again");
         }
         setLoading(false);
@@ -114,7 +109,7 @@ export default function Login() {
                         <input type="email" className="input" id="user_email" autoComplete="off" placeholder="Email" ref={emailRef}/>
                         <input type="text" className="input" id="user_role" autoComplete="off" placeholder="Role" ref={roleRef}/>
                         <input type="password" className="input" id="user_pass" autoComplete="off" placeholder="Password" ref={newPasswordRef}/>
-                        <input type="password" className="input" name="password" autoComplete="off" placeholder="Re-enter Password"ref={secondPasswordRef}></input>
+                        <input type="password" className="input" id="user_confirmPass" autoComplete="off" placeholder="Re-enter Password"ref={secondPasswordRef}></input>
                         <input type="submit" className="button is-dark" value="Create Account"/>
                     {/* </form> */}
                 </div>
