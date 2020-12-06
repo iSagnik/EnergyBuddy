@@ -41,6 +41,7 @@ const MyProgressDash = () => {
 
         }
         console.log(Complete/tot * 100)
+        console.log(" s  ")
         return (Complete/tot * 100)
     }
 

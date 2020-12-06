@@ -73,7 +73,7 @@ const MyGoalsDash = ( {goals} ) => {
     useEffect(() => {
         setGoalData(goals)
         console.log(goalsData)
-        console.log("updated")
+        console.log("up  ated")
     }, [goalsData])
 
     return (
