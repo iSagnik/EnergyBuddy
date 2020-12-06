@@ -1,6 +1,6 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Goal from '../components/goal.js';
-import { CardColumns, Button } from 'react-bootstrap';
+import { CardColumns, Button, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Layout from '../components/layout.js';
@@ -11,7 +11,7 @@ function Goals() {
     // console.log(goalsToAdd)
     const [goalsInfo, setGoalsInfo] = useState([]);
     const [goalsToAdd, setGoals] = useState([]);
-    const { currentUser, logout } = useAuth();
+    const { currentUser } = useAuth();
 
     const readAllData = async () => {
         const result = await axios({
@@ -25,8 +25,8 @@ function Goals() {
     }
 
     const getUserGoals = async () => {
-        let username = getUsername(currentUser.email);
-        //let username = "tejasgmail";
+        //let username = getUsername(currentUser.email);
+        let username = "tejasgmail";
         const result = await axios({
             method: 'get',
             url: `https://sustainability-goals-default-rtdb.firebaseio.com/users/${username}/goalsList.json`,
@@ -44,8 +44,8 @@ function Goals() {
     }
 
     async function updateGoalsList(user, list) {
-        let username = getUsername(user.email);
-        // let username = "tejasgmail";
+        //let username = getUsername(user.email);
+         let username = "tejasgmail";
         const obj = {goalsList: list};
         const result = await axios({
             method: 'patch',
@@ -71,8 +71,9 @@ function Goals() {
     
     return (
         <Layout>
-            <Button onClick = { HandleGoalsButtonClick } variant="primary"> Done </Button>
-            
+            <Container>
+                <Button onClick = { HandleGoalsButtonClick } variant="primary"> Done </Button>
+                
                 <CardColumns>
                     {console.log("type of goalsToAdd: " + typeof goalsToAdd)}
                 <Context.Provider value = { {goalsToAdd, setGoals} } >
@@ -90,7 +91,9 @@ function Goals() {
                     )
                 }
                 </Context.Provider>
-                </CardColumns>            
+                </CardColumns>
+            </Container>
+            
         </Layout>
     )
 }
