@@ -4,8 +4,6 @@ import { useAuth } from '../contexts/authContext.js';
 import { Link, useHistory } from "react-router-dom";
 import axios from 'axios';
 
-
-
 export default function SignUp() {
 
     const emailRef = useRef();
@@ -99,7 +97,7 @@ export default function SignUp() {
 
                 <div className="field">
                     <div className="control">
-                        <input className="button is-dark" type="submit" disabled={loading}/>
+                        {/* <input className="button is-dark" type="submit" disabled={loading}/> */}
                         {/* <Link to="/signup"> */}
                             <input className="button is-dark" value="Create Account" type="submit"/>
                         {/* </Link> */}
