@@ -47,6 +47,9 @@ export default function Login() {
 
     async function setData() {
         const username = getUsername(emailRef.current.value);
+        let obj = {}
+        obj["name"] = nameRef.current.value;
+        obj["points"] = 0
         const result = await axios({
             method: 'put',
             url: `https://sustainability-goals-default-rtdb.firebaseio.com/users/${username}.json`,
@@ -54,9 +57,8 @@ export default function Login() {
                 name: nameRef.current.value,
                 uniqueID: username,
                 email: emailRef.current.value,
-                goalsList: ["goal1"],
-                inCircle: false,
-                circleId: 10000, 
+                goalsList: ["goal1"], 
+                community: [obj],
                 Role: roleRef.current.value,
                 Points: 0
             }
