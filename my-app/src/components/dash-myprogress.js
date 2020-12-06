@@ -36,7 +36,7 @@ const MyProgressDash = () => {
     return (
         <Col xs = {5} className = "my-progress" >
             <h4>My Progress</h4>
-            <ProgressBar variant="success" animated now={45} />
+            <ProgressBar variant="success" animated now={90} />
         </Col>
     )
 }

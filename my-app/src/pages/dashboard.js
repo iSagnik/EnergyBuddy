@@ -1,5 +1,5 @@
 import Layout from '../components/layout';
-import { Container, Col, Row, ListGroup } from 'react-bootstrap'
+import { Container, Col, Row, ListGroup, Card } from 'react-bootstrap'
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/authContext';
 import MyGoalsDash from "../components/dash-mygoals.js"
@@ -46,7 +46,7 @@ const Dashboard = () => {
     return (
         <Layout>
             <Styling><h1>Dashboard</h1></Styling>
-            <Container fluid>
+            <Container fluid className="dashboard-container">
             <Row>
                 {console.log(goals)}
                 <MyGoalsDash goals = {goals} />
