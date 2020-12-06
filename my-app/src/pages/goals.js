@@ -32,7 +32,10 @@ function Goals() {
             withCredientials: true
            })
            const response = await result
-            setGoals(response.data);
+           console.log(response.data)
+            if(response.data)
+                setGoals(response.data);
+            console.log(goalsToAdd)
             // console.log("respond.data" + response.data);
     }
 

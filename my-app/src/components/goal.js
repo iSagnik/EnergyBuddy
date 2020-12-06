@@ -6,6 +6,7 @@ import Context from "../contexts/goalsContext.js"
 export default function Goal( props ) {
     const [toAdd, setToAdd] = useState(false)
     const {goalsToAdd, setGoals} = useContext(Context)
+    
     {console.log("type of goalsToAdd in goal: " + typeof setGoals)}
 
     function setGoalsToAdd() {

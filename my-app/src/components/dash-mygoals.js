@@ -4,11 +4,12 @@ import axios from 'axios';
 
 const MyGoalsDash = ( {goals} ) => {
 
-    const[ goalData, setGoalData] = useState([])
+    const[ goalData, setGoalData] = useState(null)
 
     
     const getGoalObject = async () => {
         let goalsObjects = []
+        
         for(var i = 0; i < goals.length; i++) {
             const result = await axios({
                 method: 'get',
@@ -45,7 +46,7 @@ const MyGoalsDash = ( {goals} ) => {
             Click to mark as complete
             <ListGroup>
                 {
-                    goalData &&
+                    goalData ?
                     goalData.map( ( userGoal, i ) => {
                             return (
                                 <ListGroup.Item action onClick = { handleCompletion }>
@@ -55,7 +56,7 @@ const MyGoalsDash = ( {goals} ) => {
                                 </ListGroup.Item>
                             )
                     }
-                    )
+                    ) : <ListGroup.Item>No Goals in Progress</ListGroup.Item>
                 }
             </ListGroup>
         </Row>
