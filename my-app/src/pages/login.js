@@ -2,7 +2,7 @@
 import React, { useRef, useState } from 'react';
 import { useAuth } from '../contexts/authContext.js';
 import { Link, useHistory } from "react-router-dom";
-// import loginBackground from '../media/loginBackground.mp4';
+import loginBackground from '../media/loginBackground.mp4';
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed';
 import '../styles/login.css';
 
