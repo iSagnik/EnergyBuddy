@@ -38,14 +38,21 @@ export default function Community() {
 
     async function handleAddFriend() {
 
+        await getUsersName();
+
         let friend = Object.values(allUsers).filter((x) => x.name==selectedName);
         let me = Object.values(allUsers).filter((x) => x.email == currentUser.email);
+        console.log("friend" + JSON.stringify(friend));
+        console.log("me" + JSON.stringify(me));
         let theirFriends;
         let myFriends;
 
-        friend[0].friends ? theirFriends = friend[0].friends : theirFriends = [];
-        me[0].friends ? myFriends = me[0].friends : myFriends = [];
-        console.log(myFriends);
+        friend[0].community ? theirFriends = friend[0].community : theirFriends = [];
+        me[0].community ? myFriends = me[0].community : myFriends = [];
+
+        console.log("theirFriends" + JSON.stringify(theirFriends));
+        console.log("myfriends" + JSON.stringify(myFriends));
+            
         
         let friendObj = {}
         let friendId = friend[0].uniqueID;
@@ -56,9 +63,13 @@ export default function Community() {
         myObj["name"] = me[0].name;
         myObj["points"] = me[0].Points;
 
-        theirFriends.push(myObj);
-        myFriends.push(friendObj);
-
+        if (!theirFriends.some((friend) => friend.name == myObj.name)) {
+            theirFriends.push(myObj);
+        }
+        if (!myFriends.some((friend) => friend.name == friendObj.name)) {
+            myFriends.push(friendObj);
+        }
+    
         await addFriends(friendId, "community", theirFriends);
         await addFriends(myId, "community", myFriends);
     }
@@ -80,6 +91,8 @@ export default function Community() {
         {allNames && <SearchBar parentfunction={setParentName} names={allNames}/>}
         <h1>{selectedName}</h1>
         <Button onClick = { handleAddFriend } variant="primary">  Add Friend </Button>
+        
+
 
     </div>);
     
