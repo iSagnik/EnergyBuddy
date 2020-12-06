@@ -43,7 +43,7 @@ export default function Goal( props ) {
                 {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
             <Card.Subtitle className="mb-2 text-muted">{props.points} points</Card.Subtitle>
             <Card.Text>
-                Description
+            
             </Card.Text>
 
             {goalsToAdd && console.log("ID:   " + JSON.stringify(goalsToAdd))}
