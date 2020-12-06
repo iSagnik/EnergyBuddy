@@ -45,7 +45,7 @@ function Goals() {
 
     async function updateGoalsList(user, list) {
         //let username = getUsername(user.email);
-         let username = "tejasgmail";
+        let username = "tejasgmail";
         const obj = {goalsList: list};
         const result = await axios({
             method: 'patch',

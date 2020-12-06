@@ -13,14 +13,8 @@ function App() {
         <Switch>
             {/* <Route path="/signup" component={SignUp} /> */}
             <Route path="/goals" component={Goals} />
-            {/* <Route path="/dashboard" component={DashBoard} /> */}
-<<<<<<< HEAD
-            <Route path="/dashboard" component={DashBoard}/>
-            <Route exact path="/" component={SignUp}/>
-            
-=======
+            <Route path="/dashboard" component={DashBoard} />
             <Route exact path="/" component={Login}/>
->>>>>>> 49b0f2b215048e41107de7c033cb061c3ad89feb
         </Switch> 
       </AuthProvider>
     </Router>
