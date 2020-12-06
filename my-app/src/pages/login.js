@@ -5,20 +5,31 @@ import { Link, useHistory } from "react-router-dom";
 import loginBackground from '../media/loginBackground.mp4';
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed';
 import '../styles/login.css';
+import axios from 'axios';
 
 export default function Login() {
 
+    // login
     const usernameRef = useRef();
     const passwordRef = useRef();
 
-    const { login, currentUser } = useAuth();
+    // signup
+    const emailRef = useRef();
+    const newPasswordRef = useRef();
+    const secondPasswordRef = useRef();
+    const roleRef = useRef();
+    const nameRef = useRef();
+
+    const [isLogin, setLogin] = useState(true);
+
+    const { login, signup, currentUser } = useAuth();
 
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
     const history = useHistory();
 
-    async function handleSubmit(e) {
+    async function handleLoginSubmit(e) {
         e.preventDefault();
         try {
             setError("");
@@ -33,6 +44,94 @@ export default function Login() {
         setLoading(false);
     }
 
+    async function setData() {
+        const username = getUsername(emailRef.current.value);
+        const result = await axios({
+            method: 'put',
+            url: `https://sustainability-goals-default-rtdb.firebaseio.com/users/${username}.json`,
+            data: {
+                name: nameRef.current.value,
+                uniqueID: username,
+                email: emailRef.current.value,
+                goalsList: ["goal1"],
+                inCircle: false,
+                circleId: 10000, 
+                Role: roleRef.current.value,
+                Points: 0
+            }
+        });
+    }
+
+    function getUsername(email) {
+        let em_split = email.split('@');
+        let username = em_split[0]+em_split[1].split('.')[0];
+        return username;
+    }
+
+    function renderLogin() {
+        return(<div className="tabs-content">
+        <form className="loginform" onSubmit={handleLoginSubmit}>
+                <input type="text" className="input" id="user_login" autoComplete="off" placeholder="Email or Username" ref={usernameRef}/>
+                <input type="password" className="input" id="user_pass" autoComplete="off" placeholder="Password" ref={passwordRef}/>
+
+                <input type="submit" className="button" value="Login"/>
+            </form>
+            <div className="help-text">
+                <p><a href="#">Forget your password?</a></p>
+            </div>
+        </div>
+        )
+    }
+
+    async function handleSignUpSubmit(e) {
+        e.preventDefault();
+        try {
+            setError("");
+
+            // check password match
+            if (newPasswordRef != secondPasswordRef) {
+                setError("Passwords do not match")
+            } else {
+                setLoading(true);
+                await signup(emailRef.current.value, passwordRef.current.value);
+                setData(); 
+                history.push('/goals'); 
+            }           
+        } catch {
+            setError("Something went wrong. Try again");
+        }
+        setLoading(false);
+    }
+
+    function renderSignUp() {
+        return (<div className="tabs-content">
+            <div className="signup-container">
+        <form className="signup-form" onSubmit={handleSignUpSubmit}>
+            {error && <h4>{error}</h4>}
+                <div id="login-tab-content" className="active">
+                    {/* <form className="signup-form" action="" method="post"> */}
+                        <input type="text" className="input" id="user_name" autoComplete="off" placeholder="Name" ref={nameRef}/>
+                        <input type="email" className="input" id="user_email" autoComplete="off" placeholder="Email" ref={emailRef}/>
+                        <input type="text" className="input" id="user_role" autoComplete="off" placeholder="Role" ref={roleRef}/>
+                        <input type="password" className="input" id="user_pass" autoComplete="off" placeholder="Password" ref={newPasswordRef}/>
+                        <input type="password" className="input" name="password" autoComplete="off" placeholder="Re-enter Password"ref={secondPasswordRef}></input>
+                        <input type="submit" className="button is-dark" value="Create Account"/>
+                    {/* </form> */}
+                </div>
+            </form>
+        </div>
+        </div>
+        )
+    }
+
+    function setLoginFalse() {
+        setLogin(false);
+    }
+
+    function setLoginTrue() {
+        setLogin(true);
+    }
+
     return ( <div style={{ width: 'auto', height: 'auto'}}>
         <ResponsiveEmbed aspectRatio="16by9" style={{position: "fixed"}}>
             <video id="background-video" className="videoTag" autoPlay="autoplay" loop="loop" muted>
@@ -41,63 +140,15 @@ export default function Login() {
         </ResponsiveEmbed>
                 
     <div className="login-container" style={{position:"fixed"}}>
-        <div class="form-wrap">
-            <div class="tabs">
-                <h3 class="signup-tab"><a class="active" href="#signup-tab-content">Sign Up</a></h3>
-                <h3 class="login-tab"><a href="#login-tab-content">Login</a></h3>
+        <div className="form-wrap">
+            <div className="tabs">
+                <h3 className="signup-tab"><a className="active" href="#signup-tab-content" onClick={setLoginFalse}>Sign Up</a></h3>
+                <h3 className="login-tab"><a href="#login-tab-content" onClick={setLoginTrue}>Login</a></h3>
             </div>
 
-            <div class="tabs-content">
-                <div id="signup-tab-content" class="active">
-                    <form class="signup-form" action="" method="post">
-                        <input type="email" class="input" id="user_email" autocomplete="off" placeholder="Email"/>
-                        <input type="text" class="input" id="user_name" autocomplete="off" placeholder="Username"/>
-                        <input type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password"/>
-                        <input type="submit" class="button" value="Sign Up"/>
-                    </form>
-                </div>
-
-                <div id="login-tab-content">
-                    <form class="login-form" action="" method="post">
-                        <input type="text" class="input" id="user_login" autocomplete="off" placeholder="Email or Username"/>
-                        <input type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password"/>
-                        <input type="checkbox" class="checkbox" id="remember_me"/>
-                        <label for="remember_me">Remember me</label>
-
-                        <input type="submit" class="button" value="Login" onClick={handleSubmit}/>
-                    </form>
-                    <div class="help-text">
-                        <p><a href="#">Forget your password?</a></p>
-                    </div>
-                </div>
-            </div>
+            {isLogin ? renderLogin() : renderSignUp()}
         </div>
-        </div> 
-        </div>                   
-    );
-
-    {/* <div style={{ width: 'auto', height: 'auto'}}>
-                <ResponsiveEmbed aspectRatio="16by9" style={{position: "fixed"}}>
-                    <video id="background-video" className="videoTag" autoPlay="autoplay" loop="loop" muted>
-                        <source type='video/mp4' src={loginBackground} />
-                    </video>
-                </ResponsiveEmbed>
-            </div>
-
-            <div class="login-box">
-                <h2>Login</h2>
-                <form>
-                    <div class="user-box">
-                        <input type="text" name="" required=""></input>
-                        <label>Username</label>
-                    </div>
-                    <div class="user-box">
-                        <input type="password" name="" required=""></input>
-                        <label>Password</label>
-                    </div>
-                    <a href="#">
-                    Submit
-                    </a>
-                </form>
-            </div> */}
+    </div>
+</div>               
+    )
 }
