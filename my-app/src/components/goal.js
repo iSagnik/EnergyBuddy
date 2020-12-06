@@ -5,38 +5,26 @@ import axios from 'axios';
 import Context from "../contexts/goalsContext.js"
 
 export default function Goal( props ) {
-
-
-    const [hasAdded, setAdd] = useState();
     const [goalsToAdd, setGoals] = useState([])
+    const [toAdd, setToAdd] = useState(false)
 
-    function setGoalsToAdd(shouldAdd, id) {
-        if( shouldAdd) {
-            goalsToAdd.push(id)
-            setGoals(goalsToAdd)
-        }
-        else {
-            //remove from list
-            var temp = []
-            for(var i = 0; i < goalsToAdd.length; i++) {
-                if(goalsToAdd[i] != id)
-                    temp.push(goalsToAdd[i])
-            }
-            setGoals(temp)
-        }
+    function setGoalsToAdd() {
+        console.log("Add button")
+        goalsToAdd.push(props.id)
+        setGoals(goalsToAdd)
+        setToAdd(true)
     }
 
-    const handleClick = ( uniqueId ) => {
-        if (hasAdded) {
+    function setGoalsToRemove() {
+        console.log("Delete button")
             //remove from list
-            setAdd(false)
-            setGoalsToAdd(0, props.uniqueId)
+        var temp = []
+        for(var i = 0; i < goalsToAdd.length; i++) {
+            if(goalsToAdd[i] != props.id)
+                temp.push(goalsToAdd[i])
         }
-        else {
-            //add to the list
-            setAdd(true)
-            setGoalsToAdd(1, props.uniqueId)
-        }
+        setGoals(temp)
+        setToAdd(false)
     }
     
     return ( 
@@ -51,7 +39,8 @@ export default function Goal( props ) {
             </Card.Text>
             {/* <Card.Link href="#">Add</Card.Link>
             <Card.Link href="#">Another Link</Card.Link> */}
-            {!hasAdded ? <Button onClick = { handleClick( props.uniqueId) } variant="primary"> Add </Button> : <Button onClick = { handleClick } variant="danger"> Remove </Button> }
+            {console.log(goalsToAdd.toString())}
+            { !toAdd ? <Button onClick = { setGoalsToAdd } variant="primary"> Add </Button> : <Button onClick = { setGoalsToRemove } variant="danger"> Remove </Button> }
             </Card.Body>
         </Card>
         </Context.Provider>
