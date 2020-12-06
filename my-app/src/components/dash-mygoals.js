@@ -10,6 +10,7 @@ const Styling = styled.div`
 
 const MyGoalsDash = ( {goals} ) => {
     const [goalsData, setGoalData] = useState(goals)
+    const [myPoints, setPoints] = useState(0)
     const { currentUser } = useAuth();
 
     function getUsername(email) {
@@ -30,18 +31,27 @@ const MyGoalsDash = ( {goals} ) => {
         });
     }
 
+    async function getPoints( user ) {
+        const result = await axios({
+            method: 'get',
+            url: `https://sustainability-goals-default-rtdb.firebaseio.com/users/${user}/points.json`,
+            withCredientials: true
+           }).then((x) => {
+            setPoints(parseInt(x.data))
+       })
+    }
+
     async function updatePoints(user, points) {
         let username = getUsername(user.email);
         //  let username = "tejasgmail";
-        const obj = {goalsList: list};
+        const obj = {Points: points};
         const result = await axios({
             method: 'patch',
-            url: `https://sustainability-goals-default-rtdb.firebaseio.com/users/${username}/.json`,
+            url: `https://sustainability-goals-default-rtdb.firebaseio.com/users/${user}/.json`,
             withCredientials: true,
             data: obj
         });
     }
-
 
     const handleCompletion = ( user ) => {
         var temp = goals
@@ -49,15 +59,16 @@ const MyGoalsDash = ( {goals} ) => {
         temp[user].isComplete = true
         setGoalData(temp)
         updateGoalsList( currentUser, goalsData)
-        //var newPoints = parseInt(goalsData[user].points) + 
+        //getPoints( currentUser )
+        //var newPoints = parseInt(goalsData[user].points) + myPoints
         //updatePoints( currentUser, newPoints )
-        console.log("Complete")
+        console.log("Complete ")
     }
 
     useEffect(() => {
         setGoalData(goals)
         console.log(goalsData)
-        console.log("updated ")
+        console.log("updated")
     }, [goalsData])
 
     return (
