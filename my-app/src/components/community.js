@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from './searchbar.js';
 import axios from 'axios';
-import { Button } from 'react-bootstrap';
+import { Button, ListGroup, Row, Col} from 'react-bootstrap';
 import { useAuth } from '../contexts/authContext.js';
+
 
 export default function Community() {
 
     const {currentUser} = useAuth();
 
     const[selectedName, setSelectedName] = useState("");
+    const[myFriends, setMyFriends] = useState([]);
     
     const[allUsers, setAllUsers] = useState({});
     const[allNames, setNames] = useState([]);
@@ -35,6 +37,14 @@ export default function Community() {
         console.log("added friends");
     }
 
+    function sortPoints(arr) {
+        arr.sort(function(a, b) {
+            return b.points - a.points;
+          });
+        console.log(arr);
+    }
+
+
 
     async function handleAddFriend() {
 
@@ -42,8 +52,8 @@ export default function Community() {
 
         let friend = Object.values(allUsers).filter((x) => x.name==selectedName);
         let me = Object.values(allUsers).filter((x) => x.email == currentUser.email);
-        console.log("friend" + JSON.stringify(friend));
-        console.log("me" + JSON.stringify(me));
+        // console.log("friend" + JSON.stringify(friend));
+        // console.log("me" + JSON.stringify(me));
         let theirFriends;
         let myFriends;
 
@@ -69,14 +79,13 @@ export default function Community() {
         if (!myFriends.some((friend) => friend.name == friendObj.name)) {
             myFriends.push(friendObj);
         }
-    
+        setMyFriends(myFriends);
         await addFriends(friendId, "community", theirFriends);
         await addFriends(myId, "community", myFriends);
-    }
+        await getUsersName();
+        
+        }
 
-    // renderLeaderboard() {
-
-    // }
 
     function setParentName(n) {
         setSelectedName(n);
@@ -91,6 +100,21 @@ export default function Community() {
         {allNames && <SearchBar parentfunction={setParentName} names={allNames}/>}
         <h1>{selectedName}</h1>
         <Button onClick = { handleAddFriend } variant="primary">  Add Friend </Button>
+        <ListGroup>
+            <ListGroup.Item><h1 className="text-center">Leaderboard</h1></ListGroup.Item>
+            {sortPoints(myFriends)}
+            {myFriends ? myFriends.map((friend) => {
+                return (
+                    <ListGroup.Item>
+                        <Row>
+                            <Col><h2>{friend.name}</h2></Col>
+                            <Col className="text-right"><h2>{friend.points}</h2></Col>
+                        </Row>                       
+                    </ListGroup.Item>
+                );
+            }): null
+        }
+        </ListGroup>
         
 
 
