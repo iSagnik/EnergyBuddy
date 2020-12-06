@@ -6,7 +6,11 @@ import MyGoalsDash from "../components/dash-mygoals.js"
 import MyProgressDash from "../components/dash-myprogress.js"
 import MyCircleDash from "../components/dash-mycircle.js"
 import axios from 'axios';
+import styled from 'styled-components'
 
+const Styling = styled.div`
+    color: white;
+`
 function getUsername(email) {
     let em_split = email.split('@');
     let username = em_split[0]+em_split[1].split('.')[0];
@@ -41,7 +45,7 @@ const Dashboard = () => {
     }, [])
     return (
         <Layout>
-            <h1>Dashboard</h1>
+            <Styling><h1>Dashboard</h1></Styling>
             <Container fluid>
             <Row>
                 {console.log(goals)}
