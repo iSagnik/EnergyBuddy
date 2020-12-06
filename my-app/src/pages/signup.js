@@ -2,14 +2,17 @@
 import React, { useRef, useState } from 'react';
 import { useAuth } from '../contexts/authContext.js';
 import { Link, useHistory } from "react-router-dom";
+import axios from 'axios';
 
 
 
 export default function SignUp() {
 
-    const usernameRef = useRef();
+    const emailRef = useRef();
     const passwordRef = useRef();
     const secondPasswordRef = useRef();
+    const roleRef = useRef();
+    const nameRef = useRef();
 
     const { signup, currentUser } = useAuth();
 
@@ -23,14 +26,31 @@ export default function SignUp() {
         try {
             setError("");
             setLoading(true);
-            let a = await signup(usernameRef.current.value, passwordRef.current.value);
-            // history.push('/profile');
-            // console.log(currentUser);
+            await signup(emailRef.current.value, passwordRef.current.value);
+            setData(); 
+            //history.push('/profile');
         } catch {
-            setError("Account credentials are wrong");
+            setError("Something went wrong. Try again");
         }
-        
         setLoading(false);
+    }
+
+    async function setData() {
+        const username = getUsername(emailRef.current.value);
+        const result = await axios({
+            method: 'put',
+            url: `https://sustainability-goals-default-rtdb.firebaseio.com/users/${username}.json`,
+            data: {
+                name: nameRef.current.value,
+                uniqueID: username,
+                email: emailRef.current.value,
+                goalsList: ["goal1"],
+                inCircle: false,
+                circleId: 10000, 
+                Role: roleRef.current.value,
+                Points: 0
+            }
+        });
     }
 
     function getUsername(email) {
@@ -44,9 +64,22 @@ export default function SignUp() {
                 <h1 className="title">Signup</h1>
                 {error && <h2>{error}</h2>}
                 <div className="field">
+                    <label className="label">Name</label>
+                    <div className="control">
+                        <input className="input" type="text" placeholder="Name" ref={nameRef} name="name"></input>
+                    </div>
+                </div>
+                <div className="field">
                     <label className="label">Enter email</label>
                     <div className="control">
-                        <input className="input" type="text" placeholder="Username" ref={usernameRef} name="username"></input>
+                        <input className="input" type="text" placeholder="Email" ref={emailRef} name="email"></input>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Role: </label>
+                    <div className="control">
+                        <input className="input" type="text" placeholder="Role" ref={roleRef} name="role"></input>
                     </div>
                 </div>
 
