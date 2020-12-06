@@ -5,9 +5,6 @@ import { Link, useHistory } from "react-router-dom";
 import axios from 'axios';
 
 export default function SignUp() {
-
-    
-
     const { login, currentUser } = useAuth();
 
     const [isSignUp, setSignUp] = useState(false);

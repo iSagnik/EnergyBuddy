@@ -58,6 +58,7 @@ function Goals() {
     useEffect(() => {
         readAllData();
         getUserGoals();
+        
 
     }, [])
     
