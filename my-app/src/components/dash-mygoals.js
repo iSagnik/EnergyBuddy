@@ -1,37 +1,55 @@
 import React, { useState, useEffect } from 'react'
 import { Col, Row, ListGroup } from 'react-bootstrap'
+import styled from 'styled-components'
+
+const Styling = styled.div`
+    color: white;
+`
 
 const MyGoalsDash = ( {goals} ) => {
-    const handleCompletion = () => {
-        //set isComplete for particular thing
+    const [goalsData, setGoalData] = useState(null)
+
+    const handleCompletion = ( currentUser) => {
+        var temp = goals
+        console.log(JSON.stringify(temp))
+        temp[currentUser].isComplete = true
+        setGoalData(temp)
+        console.log("Complete")
     }
 
+    if(!goalsData)
+        setGoalData(goals)
     // useEffect(() => {
-    //     getGoalObject()
-        
-    // }, [])
+    //     setGoalData(goals)
+    //     console.log(goalsData)
+    //     console.log("updated")
+    // }, [goalsData])
 
-    //console.log("The user goal: " + JSON.stringify(Object.keys( goals )))
     return (
         <Col className = "my-goals">
-        <h4>My Goals</h4>
+            <Styling ><h2>My Goals</h2></Styling>
+        
         <Row>
-            <h6>In Progress</h6>
+            <Styling >
+            <h5>In Progress</h5>
             <br />
             Click to mark as complete
+            </Styling>
             {/* {goals && goals["101"].displayName} */}
             <ListGroup>
                 
                 {
-                    goals ?
-                    Object.keys( goals ).map( ( userGoal, i ) => {
-                        return (
-                            <ListGroup.Item action onClick = { handleCompletion }>
-                            {/* { !(goalObj.isComplete) && goalObj.displayName} */}
-                            {console.log("Name: " + goals[userGoal].displayName)}
-                            { !goals[userGoal].isComplete && goals[userGoal].displayName }
-                            </ListGroup.Item>
-                        )
+                    goalsData ?
+                    Object.keys( goalsData ).map( ( userGoal, i ) => {
+                        if(goalsData[userGoal].displayName)
+                            return (
+                                <ListGroup.Item action onClick = { () => handleCompletion( userGoal ) }>
+                                {/* { !(goalObj.isComplete) && goalObj.displayName} */}
+                                {console.log("Name: " + goalsData[userGoal].displayName)}
+                                { !goalsData[userGoal].isComplete && goalsData[userGoal].displayName }
+                                </ListGroup.Item>
+                            )
+                        return (<></>)
 
                             
                     }
@@ -41,18 +59,19 @@ const MyGoalsDash = ( {goals} ) => {
             
         </Row>
         <Row>
-            <h6>Completed</h6>
-            Click to mark as complete
+            <Styling>
+                <h4>Completed</h4>
+            </Styling>
             <ListGroup>
             {
-                    goals ?
-                    Object.keys( goals ).map( ( userGoal, i ) => {
-                        if(goals[userGoal].isComplete) {
+                    goalsData ?
+                    Object.keys( goalsData ).map( ( userGoal, i ) => {
+                        if(goalsData[userGoal].isComplete) {
                             return (
                                 <ListGroup.Item action onClick = { handleCompletion }>
                                 {/* { !(goalObj.isComplete) && goalObj.displayName} */}
-                                {console.log("Name: " + goals[userGoal].displayName)}
-                                { goals[userGoal].displayName }
+                                {console.log("Name: " + goalsData[userGoal].displayName)}
+                                { goalsData[userGoal].displayName }
                                 </ListGroup.Item>
                             )
                         }
