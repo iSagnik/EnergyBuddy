@@ -23,4 +23,16 @@ Throughout developing this app, we learned a ton about React, Firebase, and sust
 ### What's next for EcoBuddy
 The next step for EcoBuddy is refining of current features and the addition of more features that will improve the user experience and social aspects of the app. Our biggest goal would be to convert the web app into an actual mobile application. This would allow the users to take EcoBuddy with them wherever they go. We also want to improve social features by adding circles. This will allow users to create small groups of 6 friends with whom they can compete with in daily challenges. Circles will add to engagement, and friendly competition amongst users.
 
-![Image of EcoBuddy](https://github.com/iSagnik/EnergyBuddy/blob/main/EcoBuddy.JPG)
+![Image of EcoBuddy](https://github.com/iSagnik/EnergyBuddy/blob/main/EcoBuddy.jpg)
+![Image of EcoBuddy](https://github.com/iSagnik/EnergyBuddy/blob/main/EcoBuddy(1).jpg)
+![Image of EcoBuddy (2)](https://github.com/iSagnik/EnergyBuddy/blob/main/EcoBuddy (2).jpg)
+![Image of EcoBuddy (3)](https://github.com/iSagnik/EnergyBuddy/blob/main/EcoBuddy (3).jpg)
+![Image of EcoBuddy (4)](https://github.com/iSagnik/EnergyBuddy/blob/main/EcoBuddy (4).jpg)
+![Image of EcoBuddy (5)](https://github.com/iSagnik/EnergyBuddy/blob/main/EcoBuddy (5).jpg)
+![Image of EcoBuddy (6)](https://github.com/iSagnik/EnergyBuddy/blob/main/EcoBuddy (6).jpg)
+![Image of EcoBuddy (7)](https://github.com/iSagnik/EnergyBuddy/blob/main/EcoBuddy (7).jpg)
+![Image of EcoBuddy (8)](https://github.com/iSagnik/EnergyBuddy/blob/main/EcoBuddy (8).jpg)
+![Image of EcoBuddy (9)](https://github.com/iSagnik/EnergyBuddy/blob/main/EcoBuddy (9).jpg)
+![Image of EcoBuddy (10)](https://github.com/iSagnik/EnergyBuddy/blob/main/EcoBuddy (10).jpg)
+![Image of EcoBuddy (11)](https://github.com/iSagnik/EnergyBuddy/blob/main/EcoBuddy (11).jpg)
+![Image of EcoBuddy (12)](https://github.com/iSagnik/EnergyBuddy/blob/main/EcoBuddy (12).jpg)
