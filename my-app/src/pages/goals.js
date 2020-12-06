@@ -6,12 +6,6 @@ import axios from 'axios';
 import Layout from '../components/layout.js';
 import Context from "../contexts/goalsContext.js"
 
-function HandleGoalsButtonClick() {
-    const {goalsToAdd} = useContext(Context)
-    //push to database
-    console.log("Button click successful")
-}
-
 function Goals() {
     // console.log(goalsToAdd)
     const [goalsInfo, setGoals] = useState([]);
@@ -30,6 +24,12 @@ function Goals() {
     useEffect(() => {
         readAllData();
     }, [])
+    
+    const HandleGoalsButtonClick = () => {
+        const {goalsToAdd} = useContext(Context)
+        //push to database
+        console.log("Button click successful")
+    }
     
     return (
         <Layout>
