@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Layout from '../components/layout.js';
 import Context from "../contexts/goalsContext.js";
-import { useAuth } from '../contexts/authContext';
+import { useAuth } from '../contexts/authContext.js';
 
 function Goals() {
     // console.log(goalsToAdd)
@@ -58,8 +58,6 @@ function Goals() {
     useEffect(() => {
         readAllData();
         getUserGoals();
-        
-
     }, [])
     
     const HandleGoalsButtonClick = () => {
