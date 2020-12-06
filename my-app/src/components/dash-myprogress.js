@@ -32,10 +32,10 @@ const MyProgressDash = () => {
 
     function calcPercent() {
         var tot = 0
-        var Complete =0
+        var Complete = 0
         for(const obj in goals ) {
             tot++;
-            if(obj["isComplete"]) {
+            if(goals[obj]["isComplete"]) {
                 Complete++;
             }
 
