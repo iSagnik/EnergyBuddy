@@ -38,13 +38,11 @@ export default function Goal( props ) {
             <Card.Text>
                 Description
             </Card.Text>
-            {/* <Card.Link href="#">Add</Card.Link>
-            <Card.Link href="#">Another Link</Card.Link> */}
+
             {goalsToAdd && console.log("ID:   " + goalsToAdd.toString())}
-            { !(goalsToAdd == `undefined` || goalsToAdd.includes(props.uniqueId)) && !toAdd ? <Button onClick = { setGoalsToAdd } variant="primary"> Add </Button> : <Button onClick = { setGoalsToRemove } variant="danger"> Remove </Button> }
+            { !(goalsToAdd === `undefined` || goalsToAdd.includes(props.uniqueId)) && !toAdd ? <Button onClick = { setGoalsToAdd } variant="primary"> Add </Button> : <Button onClick = { setGoalsToRemove } variant="danger"> Remove </Button> }
             </Card.Body>
         </Card>
-        // </Context.Provider>
   );
 
 }
