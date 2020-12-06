@@ -4,12 +4,14 @@ import { CardColumns, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Layout from '../components/layout.js';
-import Context from "../contexts/goalsContext.js"
+import Context from "../contexts/goalsContext.js";
+import { useAuth } from '../contexts/authContext';
 
 function Goals() {
     // console.log(goalsToAdd)
     const [goalsInfo, setGoalsInfo] = useState([]);
-    const [goalsToAdd, setGoals] = useState([])
+    const [goalsToAdd, setGoals] = useState([]);
+    const { currentUser, logout } = useAuth();
 
     const readAllData = async () => {
         const result = await axios({
@@ -22,19 +24,50 @@ function Goals() {
            console.log(JSON.stringify(response.data))
     }
 
+    const getUserGoals = async () => {
+        // let username = getUsername(user.email);
+        let username = "tejasgmail";
+        const result = await axios({
+            method: 'get',
+            url: `https://sustainability-goals-default-rtdb.firebaseio.com/users/${username}/goalsList.json`,
+            withCredientials: true
+           })
+           const response = await result
+            setGoals(response.data);
+            // console.log("respond.data" + response.data);
+    }
+
+    function getUsername(email) {
+        let em_split = email.split('@');
+        let username = em_split[0]+em_split[1].split('.')[0];
+        return username;
+    }
+
+    async function updateGoalsList(user, list) {
+        let username = getUsername(user.email);
+        // let username = "tejasgmail";
+        const obj = {goalsList: list};
+        const result = await axios({
+            method: 'patch',
+            url: `https://sustainability-goals-default-rtdb.firebaseio.com/users/${username}/.json`,
+            withCredientials: true,
+            data: obj
+        });
+    }
+
     // const getUserGoalsList = ( userId ) => {
 
     // }
 
     useEffect(() => {
         readAllData();
+        getUserGoals();
         //getUserGoalsList
     }, [])
     
     const HandleGoalsButtonClick = () => {
         //push to database
-
-
+        updateGoalsList(currentUser, goalsToAdd);
         console.log(goalsToAdd.length)
         console.log("Button click successful")
     }

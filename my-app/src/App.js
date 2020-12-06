@@ -11,9 +11,9 @@ function App() {
   return (
     <div className="App">
       <AuthProvider> 
-        {/* { <Login/>} */}
+        {/* <Login/> */}
         <Goals/>
-        <SignUp/>
+        {/* <SignUp/> */}
       </AuthProvider>
     </div>
   );
