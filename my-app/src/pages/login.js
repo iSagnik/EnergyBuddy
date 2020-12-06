@@ -164,8 +164,6 @@ export default function Login() {
 
             {isLogin ? renderLogin() : renderSignUp()}
         </div>
-
-        <Community/>
     </div>
 </div>               
     )
