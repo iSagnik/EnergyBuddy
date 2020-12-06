@@ -67,7 +67,7 @@ const MyGoalsDash = ( {goals} ) => {
         //getPoints( currentUser )
         //var newPoints = parseInt(goalsData[user].points) + myPoints
         //updatePoints( currentUser, newPoints )
-        console.log("comp")
+        console.log("comp ")
     }
 
     useEffect(() => {

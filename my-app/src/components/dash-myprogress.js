@@ -40,7 +40,7 @@ const MyProgressDash = () => {
             }
 
         }
-
+        console.log(Complete/tot * 100)
         return (Complete/tot * 100)
     }
 
@@ -50,7 +50,7 @@ const MyProgressDash = () => {
     return (
         <Col xs = {5} className = "my-progress" >
             <h4>My Progress</h4>
-            <ProgressBar variant="success" animated now={ calcPercent } />
+            <ProgressBar variant="success" animated now={ calcPercent() } />
         </Col>
     )
 }
