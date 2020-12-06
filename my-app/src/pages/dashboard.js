@@ -29,6 +29,8 @@ const Dashboard = () => {
             withCredientials: true
            })
            const response = await result
+           console.log(response.data)
+           if(response.data)
             setGoals(response.data);
             // console.log("respond.data" + response.data);
     }
@@ -42,6 +44,7 @@ const Dashboard = () => {
             <h1>Dashboard</h1>
             <Container fluid>
             <Row>
+                {console.log(goals)}
                 <MyGoalsDash goals = {goals} />
                 <MyProgressDash />
                 <MyCircleDash />

@@ -14,44 +14,23 @@ const Layout = ({ children }) => {
 
   return (
     <>
-    {/* <div>
-            
-            <div
-            style={{
-                backgroundImage: `url(${natureBackground})`,
-                backgroundPosition: 'center',
-                backgroundSize: 'auto',
-                backgroundRepeat: 'no-repeat'
-            }}> */}
-        <header>            
-            {/* <ResponsiveEmbed id="goalsBackground" aspectRatio="16by9" style={{position: "fixed"}}> */}
-                {/* <Image id="header-img" src={natureBackground} fluid /> */}
-            {/* </ResponsiveEmbed?> */}
-
-        {/* <View style={styles.container}>
-            <Image
-            resizeMode="cover"
-            style={styles.cover}
-            source={{natureBackground}}
-            />
-        </View> */}
-
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Navbar.Brand href="/">Energy Buddy</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="mr-auto">
-                    <Nav.Link href="/goals">Goals</Nav.Link>
-                    <Nav.Link href="#pricing">Dashboard</Nav.Link>
-                    
-                    </Nav>
-                    <Nav>
-                    <Nav.Link onClick={logout} href="/">
-                        Logout
-                    </Nav.Link>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
+        <header>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar.Brand href="/">Energy Buddy</Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="mr-auto">
+                <Nav.Link href="/goals">Goals</Nav.Link>
+                <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+                
+                </Nav>
+                <Nav>
+                <Nav.Link onClick={logout} href="/">
+                    Logout
+                </Nav.Link>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
         </header>
         <main id="main">
             {children}
