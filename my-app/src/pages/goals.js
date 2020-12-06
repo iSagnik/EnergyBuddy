@@ -58,6 +58,7 @@ function Goals() {
     useEffect(() => {
         readAllData();
         getUserGoals();
+        
 
     }, [])
     
@@ -89,8 +90,7 @@ function Goals() {
                     )
                 }
                 </Context.Provider>
-                </CardColumns>
-            
+                </CardColumns>            
         </Layout>
     )
 }
