@@ -14,44 +14,21 @@ const MyGoalsDash = ( {goals} ) => {
                 method: 'get',
                 url: `https://sustainability-goals-default-rtdb.firebaseio.com/goalInfo/${goals[i]}.json`,
                 withCredientials: true
-               })//.then((x) => response =  x.data);
+               })
                const response = await result
                const temp = response.data
-               //const stringObj = JSON.stringify(temp)
-               //console.log(stringObj)
-               //const tempJson = JSON.parse(stringObj)
-               //console.log(tempJson)
+
                if(temp) {
                    console.log(temp.displayName)
                    goalsObjects.push(temp)
-               }
-               
-               //console.log(goalsObjects[i].displayName)
+               } 
         }
         setGoalData(goalsObjects)
-           //return (response.data)
-        //    setGoalsInfo(Object.values(response.data))
-        //    console.log(JSON.stringify(response.data))
     }
 
     const handleCompletion = () => {
         //set isComplete for particular thing
     }
-
-    // async function helpPlis () {
-    //     console.log(goals.length)
-    //     if(goals) {
-    //         for(var i = 0; i < goals.length; i++) {
-    //             console.log(goals[i])
-    //             const temp = await getGoalObject( goals[idx] )
-    //             goalObjectsList.push( temp )
-    //             console.log(goalObjectsList[i])
-    //         }
-    //     }
-        
-    //     console.log("Temp: " + temp)
-    //     setGoalData(goalObjectsList)
-    // }
 
     useEffect(() => {
         getGoalObject()

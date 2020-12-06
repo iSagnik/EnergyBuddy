@@ -8,7 +8,6 @@ import Context from "../contexts/goalsContext.js";
 import { useAuth } from '../contexts/authContext';
 
 function Goals() {
-    // console.log(goalsToAdd)
     const [goalsInfo, setGoalsInfo] = useState([]);
     const [goalsToAdd, setGoals] = useState([]);
     const { currentUser } = useAuth();
