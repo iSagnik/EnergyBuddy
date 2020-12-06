@@ -89,6 +89,7 @@ export default function Community() {
 
     function setParentName(n) {
         setSelectedName(n);
+        
     }
 
     useEffect(() => {
@@ -98,8 +99,11 @@ export default function Community() {
     return ( 
     <div className="community-container">
         {allNames && <SearchBar parentfunction={setParentName} names={allNames}/>}
-        <h1>{selectedName}</h1>
-        <Button onClick = { handleAddFriend } variant="primary">  Add Friend </Button>
+        <br/>
+        <Button className="add-friend" onClick = { handleAddFriend } variant="primary">  Add Friend </Button>
+        <br/>
+        
+        <div>
         <ListGroup>
             <ListGroup.Item><h1 className="text-center">Leaderboard</h1></ListGroup.Item>
             {sortPoints(myFriends)}
@@ -115,6 +119,7 @@ export default function Community() {
             }): null
         }
         </ListGroup>
+        </div>
         
 
 

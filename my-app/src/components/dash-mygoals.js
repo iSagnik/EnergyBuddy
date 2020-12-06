@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Col, Row, ListGroup } from 'react-bootstrap'
+import { Col, Row, ListGroup, Card } from 'react-bootstrap'
 import styled from 'styled-components'
 import { useAuth } from '../contexts/authContext.js';
 import axios from 'axios';
 
 const Styling = styled.div`
-    color: white;
+    color: black;
+    padding-left: 30px;
+`
+
+const RowStyle = styled.div`
+    inline: block;
 `
 
 const MyGoalsDash = ( {goals} ) => {
@@ -62,7 +67,7 @@ const MyGoalsDash = ( {goals} ) => {
         //getPoints( currentUser )
         //var newPoints = parseInt(goalsData[user].points) + myPoints
         //updatePoints( currentUser, newPoints )
-        console.log("Complete ")
+        console.log("comp")
     }
 
     useEffect(() => {
@@ -73,16 +78,19 @@ const MyGoalsDash = ( {goals} ) => {
 
     return (
         <Col className = "my-goals">
+            <Card className="card-background">
             <Styling ><h2>My Goals</h2></Styling>
-        
-        <Row>
             <Styling >
             <h5>In Progress</h5>
             <br />
             Click to mark as complete
             </Styling>
+        <RowStyle>
+        <Row>
+            
+            
             {/* {goals && goals["101"].displayName} */}
-            <ListGroup>
+            <ListGroup className="extra-padding">
                 
                 {
                     goalsData ?
@@ -108,7 +116,7 @@ const MyGoalsDash = ( {goals} ) => {
             <Styling>
                 <h4>Completed</h4>
             </Styling>
-            <ListGroup>
+            <ListGroup className="extra-padding">
             {
                     goalsData ?
                     Object.keys( goalsData ).map( ( userGoal, i ) => {
@@ -128,6 +136,8 @@ const MyGoalsDash = ( {goals} ) => {
                 }
             </ListGroup>
         </Row>
+        </RowStyle>
+        </Card>
     </Col>
     )
 }
